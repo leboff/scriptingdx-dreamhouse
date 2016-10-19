@@ -1,0 +1,11 @@
+{
+  "Company": "ACME Org",
+  "Country": "US",
+  "LastName": "Wegner",
+  "Email": "wade.wegner@salesforce.com",
+  "Edition": "Enterprise",
+  "OrgPreferences" : {
+     “ChatterEnabled” : false,
+     "IsOrdersEnabled" : true
+  }
+}
