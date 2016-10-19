@@ -1,7 +1,7 @@
 {
-  "Company": "ACME Org",
+  "Company": "Demo Company",
   "Country": "US",
-  "LastName": "Wegner",
+  "LastName": "Demo",
   "Email": "wade.wegner@salesforce.com",
   "Edition": "Enterprise",
   "OrgPreferences" : {
