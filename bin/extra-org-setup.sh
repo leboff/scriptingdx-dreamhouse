@@ -1,21 +1,17 @@
 #!/usr/bin/env bash
 
 ##
-# Performs additional setup on Dreamhouse org.
+# Performs additional app setup on org.
 #
 # This script:
-#   - Enables Dreamhouse PermissionSet on configured workspace,
+#   - Enables PermissionSet on configured workspace,
 #   - Loads sample data.
-#
-# Requires Heroku CLI and AppCloud and Force.com CLI
-# plugins which are installed by Salesforce Buildpack.
 ##
 
 # Debug, echo every command
 #set -x
 
 
-SCRATCH_ORG=org@salesforce.com
 HEROKU_CLIENT=heroku
 
 runCmd() {

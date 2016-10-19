@@ -45,8 +45,7 @@
                 "dreamhouse"
             ],
             "suites": [
-                "basic-apex",
-                "integration"
+                "basic-apex"
             ]
         },{
             "name": "all-tests",
