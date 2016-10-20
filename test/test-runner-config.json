@@ -60,21 +60,12 @@
     ],
     "operations": [
         {
-            "name": "download-selenium-client",
-            "exec": "if [ ! -f \"testartifacts/selenium-java.zip\" ]; then curl",
+            "name": "install-selenium-client",
+            "type": "shell",
+            "exec": "bash",
             "args": [
-                "-o $outputDir/selenium-java.zip",
-                "http://selenium-release.storage.googleapis.com/3.0-beta3/selenium-java-3.0.0-beta3.zip",
-                "; else echo \"Selenium client zip exist\"; fi"
-            ]
-        },
-        {
-            "name": "unzip-selenium-client",
-            "exec": "unzip",
-            "args": [
-                "-o",
-                "$outputDir/selenium-java",
-                "-d $outputDir/selenium-client-jars"
+                "$WORKSPACE/test/install-selenium.sh",
+                "$outputDir"
             ]
         },
         {
@@ -101,6 +92,14 @@
                 "org.junit.runner.JUnitCore",
                 "$TESTS"
             ]
+        },
+        {
+            "name": "wait-for-org-replication",
+            "type": "shell",
+            "exec": "sleep",
+            "args": [
+                "1m"
+            ]
         }
     ],
     "contexts": [
@@ -109,24 +108,24 @@
             "useWorkspaceOrg": true,
             "pushSource": false,
             "beforeTests": [
-                "download-selenium-client",
-                "unzip-selenium-client",
+                "install-selenium-client",
                 "compile"
             ]
         },
         {
             "name": "pull-request",
             "beforeTests": [
-                "download-selenium-client",
-                "unzip-selenium-client",
+                "install-selenium-client",
                 "compile"
+            ],
+            "afterTests": [
+                "wait-for-org-replication"
             ]
         },
         {
             "name": "integration",
             "beforeTests": [
-                "download-selenium-client",
-                "unzip-selenium-client",
+                "install-selenium-client",
                 "compile"
             ]
         }
