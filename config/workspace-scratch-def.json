@@ -3,7 +3,7 @@
   "Country": "US",
   "LastName": "Demo",
   "Email": "wade.wegner@salesforce.com",
-  "Edition": "Developer",
+  "TemplateId": "0TTB00000003V07",
   "OrgPreferences" : {
     "S1DesktopEnabled" : true
   }
