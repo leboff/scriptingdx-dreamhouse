@@ -1,6 +1,6 @@
 {
     "settings": {
-        "outputDir": "testArtifacts",
+        "outputDir": "$WORKSPACE/test/artifacts",
         "selenium": true
     },
     "orgs": [
