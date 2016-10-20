@@ -4,22 +4,31 @@ import java.util.List;
 import org.junit.*;
 import org.openqa.selenium.*;
 
+import org.junit.runner.JUnitCore;
+
 /**
- * UI test.
+ * Property Explorer UI test.
  */
 public class IntegrationTest extends BaseSalesforceTest {
     @Test
     public void testIntegration() {
-        
-       final String pageSrc = this.login("/one/one.app");
-       WebElement e = this.fluentWait(new By.ByCssSelector(".oneContent h2"));
-       Assert.assertTrue("One.app was not loaded", e.isDisplayed());		
+        this.login("/one/one.app#/sObject/Property__c/home");
 
-    //    final String pageSrc = this.login("/one/one.app#/sObject/Property__c/home");
-    //    ((JavascriptExecutor) driver).executeScript("window.location.hash='#/sObject/Property__c/home'");
-    //    this.fluentWait(By.linkText("Contemporary Luxury")).click();
-    //    Assert.assertTrue(this.fluentWait(By.xpath("//*[contains(text(), 'Contemporary Luxury')]")).isDisplayed());
-    //    WebElement e = this.driver.findElement(By.xpath("//span[contains(text(), 'IQ Picture Uploader')]"));        
-    //    Assert.assertTrue("IQ Compontent was not loaded", e.isDisplayed());
+        // Salesforce retUrl will strip the hash. Selenium driver.get() will hang on a hash. SO set the hash manually.
+        ((JavascriptExecutor) driver).executeScript("window.location.hash='#/sObject/Property__c/home'");
+
+        this.fluentWait(By.xpath("//a[contains(text(), 'Contemporary Luxury')]")).click();
+        Assert.assertTrue(this.fluentWait(By.xpath("//span[contains(text(), 'Contemporary Luxury')]")).isDisplayed());
     }
+
+	public static void main(String[] args) {
+		// Instantiate a JUniteCore object
+		JUnitCore core = new JUnitCore();
+
+		// Add TAP Reporter Listener to the core object executor
+		core.addListener(new TapReporter());
+
+		// Run the test suite
+		core.run(IntegrationTest.class);
+	}
 }

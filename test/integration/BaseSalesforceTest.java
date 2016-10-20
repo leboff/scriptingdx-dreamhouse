@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.phantomjs.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -15,7 +17,7 @@ import com.google.common.base.Function;
 import org.openqa.selenium.support.ui.*;
 
 /**
- * Base test for ALMSourceDrivenDev/Example-Dev-Workspace UI tests.
+ * Base test.
  */
 public class BaseSalesforceTest {
     private static final String DEFAULT_SELENIUM_URL = "http://127.0.0.1:4444/wd/hub";
@@ -24,11 +26,34 @@ public class BaseSalesforceTest {
 
     @Before
     public void setup() throws MalformedURLException {
+        String mode = getProperty("WEBKIT_MODE");
+
         DesiredCapabilities caps = DesiredCapabilities.chrome();
         caps.setCapability("version", "43.0");
 
-        driver = new RemoteWebDriver(new URL(DEFAULT_SELENIUM_URL), caps);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        switch (mode) {
+            case "PHANTOM":
+                // USING PHANTOM
+                caps = new DesiredCapabilities();
+                caps.setCapability(
+                    PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+                    getProperty("PHANTOM_BINARY_PATH")
+                );
+                driver = new  PhantomJSDriver(caps);
+                driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                driver.manage().window().setSize(new Dimension(1280, 1024));
+                break;
+            case "SAUCELABS":
+                // USING SAUCELABS
+                final String USERNAME = getProperty("SAUCE_USERNAME");
+                final String ACCESS_KEY = getProperty("SAUCE_ACCESS_KEY");
+                final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+                driver = new RemoteWebDriver(new URL(URL), caps);
+                break;
+            default:
+                // USING LOCAL SELENIUM
+                driver = new RemoteWebDriver(new URL(DEFAULT_SELENIUM_URL), caps);
+        }
     }
 
     @After
@@ -41,6 +66,7 @@ public class BaseSalesforceTest {
     protected String login() {
         return login(null);
     }
+
     protected String login(String retUrl) {
         String instanceUrl = getProperty("SALESFORCE_INSTANCE_URL");
         String accessToken = getProperty("SALESFORCE_ACCESS_TOKEN");
@@ -51,17 +77,20 @@ public class BaseSalesforceTest {
             frontDoorUrl += ("&retURL=" + retUrl);
         }
 
-        System.out.println();
-        System.out.println(frontDoorUrl);
-        System.out.println();
-
         driver.get(frontDoorUrl);
         return driver.getPageSource();
     }
 
     public WebElement fluentWait(final By locator) {
+        int timeout = 5;
+
+        if (getProperty("WEBKIT_MODE") == "PHANTOM") {
+            // Phantom is much slower, it seems... for headless...
+            timeout = 20;
+        }
+
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(5, TimeUnit.SECONDS)
+                .withTimeout(timeout, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
 

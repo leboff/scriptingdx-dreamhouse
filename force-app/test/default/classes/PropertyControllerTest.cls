@@ -26,5 +26,4 @@ public class PropertyControllerTest {
 	        System.assert(success);
         }
     }
-
 }
