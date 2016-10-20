@@ -115,7 +115,15 @@
             ]
         },
         {
-            "name": "heroku-ci",
+            "name": "pull-request",
+            "beforeTests": [
+                "download-selenium-client",
+                "unzip-selenium-client",
+                "compile"
+            ]
+        },
+        {
+            "name": "integration",
             "beforeTests": [
                 "download-selenium-client",
                 "unzip-selenium-client",
@@ -125,15 +133,23 @@
     ],
     "profiles": [
         {
-            "name": "basic",
+            "name": "dev",
             "context": "local",
             "default": true,
             "invocations": [
                 "basic"
             ]
-        },{
+        },
+        {
+            "name": "basic",
+            "context": "pull-request",
+            "invocations": [
+                "basic"
+            ]
+        },
+        {
             "name": "master",
-            "context": "heroku-ci",
+            "context": "integration",
             "invocations": [
                 "all-tests"
             ]
