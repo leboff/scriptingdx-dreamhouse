@@ -165,4 +165,3 @@ Now, at this point we could push this back into source control. But first, letâ€
 This command will run the basic profile thatâ€™s specified in the test runner config. By default, this is setup to run all our Apex tests and Selenium tests. All the Selenium jars and binaries will get downloaded as part of the execution of the test runner.
 
 ![image_16](https://cloud.githubusercontent.com/assets/746259/19540603/760af802-9615-11e6-8db3-f8944c815187.png)
-
