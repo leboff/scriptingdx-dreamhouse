@@ -10,17 +10,17 @@ The Salesforce Developer Experience (SFDX) starts with source code living in you
 
 Our first goal is to set up a developer workspace for us to use to modify our application. It starts by cloning the repository. Use the command ...
 
-    git clone https://github.com/forcedotcom/dreamhouse-devkeynote-sdx.git
+    git clone https://github.com/forcedotcom/sfdx-dreamhouse.git
 
 … or ...
 
-    git clone git@github.com:forcedotcom/dreamhouse-devkeynote-sdx.git
+    git clone git@github.com:forcedotcom/sfdx-dreamhouse.git
 
 … to clone the repository. Then, open the directory.
 
-    cd dreamhouse-devkeynote-sdx
+    cd sfdx-dreamhouse
 
-![image_0](https://cloud.githubusercontent.com/assets/746259/19540587/75be3ecc-9615-11e6-81a0-d349fbdde3ce.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616507/52c78698-97c9-11e6-8671-eba4c8bae9d5.png)
 
 Cloning the repository pulls all the source code to the local filesystem. Before you start editing, though, you’ll want to check out your own branch. This is a best practice as defined by [Github Flow](https://guides.github.com/introduction/flow/).
 
@@ -28,9 +28,9 @@ Cloning the repository pulls all the source code to the local filesystem. Before
 
 Now you’re working in your own branch, making it easier to submit updates to your team later on.
 
-In SFDX we provide a comprehensive set of capabilities through our new command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing heroku force --help.
+In SFDX we provide a comprehensive set of capabilities through our new command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing `heroku force --help`.
 
-![image_1](https://cloud.githubusercontent.com/assets/746259/19540588/75d16e3e-9615-11e6-9c26-b26ade4d6a4e.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616512/78c36060-97c9-11e6-9983-1a655a733a9d.png)
 
 ## Authorize the Environment Hub
 
@@ -52,7 +52,7 @@ You’ll next need to authorize the SFDX "Global Connected App".
 
 Once logged in, the CLI has been authorized.
 
-![image_4](https://cloud.githubusercontent.com/assets/746259/19540590/75e0328e-9615-11e6-9437-533dbf8e8dd9.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616515/9ded635e-97c9-11e6-900e-cc6acf9d92ba.png)
 
 From here, you’ll authorized to interact with the hub org.
 
@@ -64,8 +64,8 @@ Next step is to create a scratch org we can use during development. The scratch 
 {
   "Company": "ACME Org",
   "Country": "US",
-  "LastName": "Wegner",
-  "SignupEmail": "wade.wegner@salesforce.com",
+  "LastName": "Your Last Name",
+  "SignupEmail": "your@email.com",
   "Edition": "Enterprise",
   "OrgPreferences" : {
      "S1DesktopEnabled" : true,
@@ -80,7 +80,7 @@ To create the scratch org, type the following command in the CLI:
 
 In less than a minute, the command should complete. You’ll get two items in the output: the Org ID and the username.
 
-![image_5](https://cloud.githubusercontent.com/assets/746259/19540591/75e161f4-9615-11e6-9baa-0daf311f2c5f.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616524/d8c4573a-97c9-11e6-9ced-2ab8bf83ae35.png)
 
 Notice that we didn’t get a password. Given that we can type the command heroku force:org:open, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use --password to pass in a known password if required.
 
@@ -90,7 +90,7 @@ At this point we have a brand new, empty, scratch org. We need to populate it wi
 
 To push all the local source into the scratch org, type the command: heroku force:src:push. It will take a few moments, but quickly all the metadata will be pushed into the scratch org.
 
-![image_6](https://cloud.githubusercontent.com/assets/746259/19540592/75e1bb18-9615-11e6-917c-8bf830285c47.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616528/196668e6-97ca-11e6-900b-d63cbad55306.png)
 
 ## Assign a Permset to the DreamHouse App
 
@@ -98,7 +98,7 @@ At this point we’re close to being able to run the DreamHouse app. But, the Dr
 
     heroku force:permset:assign -n DreamHouse
 
-![image_7](https://cloud.githubusercontent.com/assets/746259/19540594/75e47a56-9615-11e6-9475-a1de2334a44d.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616529/3cee3046-97ca-11e6-8125-18643db2ab50.png)
 
 ## Import Test Data
 
@@ -106,13 +106,13 @@ Lastly, we don’t have any of the DreamHouse app data in the org. But we do hav
 
     heroku force:data:import --plan data/sample-data-plan.json
 
-![image_8](https://cloud.githubusercontent.com/assets/746259/19540597/75f707ac-9615-11e6-9a33-4d3f8e673c4d.png)
+![image](https://cloud.githubusercontent.com/assets/746259/19616537/5b1ee268-97ca-11e6-8533-938e1fde73e1.png)
 
 Now we’ve fully setup and configured our developer workspace. We’re ready to begin development.
 
 ## Open the WorkSpace Scratch Org
 
-We can try out the application by opening our scratch org: heroku force:org:open. Notice you won’t have to log in!
+We can try out the application by opening our scratch org: `heroku force:org:open`. Notice you won’t have to log in!
 
 To open the DreamHouse app, click the App Launcher and then click DreamHouse:
 
@@ -142,26 +142,28 @@ Click through the wizard, and then switch to the Project Explorer. You’ll see 
 
 You’re now able to use Eclipse to update your project and it’s fully integrated into the Git repository.
 
-## Open the Org
-
-Coding in the IDE is great, but some features are best developed in a browser. In the Force.com Commands panel, double-click **Open Org**. Your org opens in the browser. From Setup, enter Lightning in the Quick Find box, then click **Lightning App Builder**. Next to Property Record Page, click **Edit**. Drag the IQPictureUploader custom component to the page and click **Save**.
-
-![image_14](https://cloud.githubusercontent.com/assets/746259/19540602/76091ec4-9615-11e6-89f4-efd9b72b95bb.png)
-
-You’ve just used the scratch org to load the App Builder and save the updated flexipage. In Eclipse, in the Force.com Commands panel, double-click **Pull Metadata** to pull that update back to the filesystem. This allows you you to check it into source control.
-
-To confirm, type `git status` in the command line.
-
-![image_15](https://cloud.githubusercontent.com/assets/746259/19540601/7608b542-9615-11e6-9298-ba62c69740f7.png)
-
-You can see the flexipage has been modified.
-
 ## Test the Application Using the Test Runner
 
 Now, at this point we could push this back into source control. But first, let’s ensure all our unit tests pass. For this, we’ll use the new test runner that’s integrated into the CLI.
 
-    heroku force:test --config test/test-runner-config.json --profile basic
+    heroku force:test --config test/test-runner-config.json --profile local
 
-This command will run the basic profile that’s specified in the test runner config. By default, this is setup to run all our Apex tests and Selenium tests. All the Selenium jars and binaries will get downloaded as part of the execution of the test runner.
+This command will run the local profile that’s specified in the test runner config. By default, this is setup to run all our Apex tests and Selenium tests. All the Selenium jars and binaries will get downloaded as part of the execution of the test runner.
 
-![image_16](https://cloud.githubusercontent.com/assets/746259/19540603/760af802-9615-11e6-8db3-f8944c815187.png)
+## More to Come
+
+Soon we'll add the following to this quick start:
+
+* Details on setting up Heroku Pipelines
+* Details on setting up Heroku CI
+* Process for kicking off Continuous Integration and Continuous Delivery with Heroku Flow
+
+## Resources
+
+For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://goo.gl/rG43Cz).
+
+## Issues
+
+Please log issues related to this repository [here](https://github.com/forcedotcom/sfdx-dreamhouse/issues).
+
+
