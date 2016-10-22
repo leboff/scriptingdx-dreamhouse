@@ -23,11 +23,14 @@ public class BaseSalesforceTest {
     private static final String DEFAULT_SELENIUM_URL = "http://127.0.0.1:4444/wd/hub";
 
     protected WebDriver driver;
+    private final String mode;
+
+    BaseSalesforceTest() {
+        mode = getProperty("WEBKIT_MODE");
+    }
 
     @Before
     public void setup() throws MalformedURLException {
-        String mode = getProperty("WEBKIT_MODE");
-
         DesiredCapabilities caps = DesiredCapabilities.chrome();
         caps.setCapability("version", "43.0");
 
@@ -84,7 +87,7 @@ public class BaseSalesforceTest {
     public WebElement fluentWait(final By locator) {
         int timeout = 5;
 
-        if (getProperty("WEBKIT_MODE") == "PHANTOM") {
+        if (mode.equals("PHANTOM")) {
             // Phantom is much slower, it seems... for headless...
             timeout = 20;
         }
