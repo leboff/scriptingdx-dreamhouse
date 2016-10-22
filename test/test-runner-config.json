@@ -116,6 +116,7 @@
             "useWorkspaceOrg": true,
             "pushSource": false,
             "beforeTests": [
+                "setup-phantom",
                 "compile-integration-tests"
             ]
         },

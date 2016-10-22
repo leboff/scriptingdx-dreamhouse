@@ -1,0 +1,69 @@
+{
+    "summary": {
+        "outcome": "Passed",
+        "testsRan": 2,
+        "passing": 2,
+        "failing": 0,
+        "passRate": "100%",
+        "failRate": "0%",
+        "testStartTime": "Oct 21, 2016 8:18 PM",
+        "testExecutionTime": "88 ms",
+        "testTotalTime": "88 ms",
+        "commandTime": "3535 ms",
+        "testRunId": "7074C000000q0YW",
+        "hostname": "https://page-page-8677-dev-ed.cs61.my.salesforce.com",
+        "orgId": "00D4C0000000a8mUAA",
+        "username": "workspaceorg1477105543108@democompany.com",
+        "userId": "0054C000000E9EkQAK"
+    },
+    "tests": [
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v38.0/tooling/sobjects/ApexTestResult/07M4C000000DeprUAC"
+            },
+            "Id": "07M4C000000DeprUAC",
+            "QueueItemId": "7094C000000ClyKQAS",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7074C000000q0YWQAY",
+            "MethodName": "testFindAll",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v38.0/tooling/sobjects/ApexClass/01p4C0000004jK7QAI"
+                },
+                "Id": "01p4C0000004jK7QAI",
+                "Name": "PropertyControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 62,
+            "FullName": "PropertyControllerTest.testFindAll"
+        },
+        {
+            "attributes": {
+                "type": "ApexTestResult",
+                "url": "/services/data/v38.0/tooling/sobjects/ApexTestResult/07M4C000000DepsUAC"
+            },
+            "Id": "07M4C000000DepsUAC",
+            "QueueItemId": "7094C000000ClyKQAS",
+            "StackTrace": null,
+            "Message": null,
+            "AsyncApexJobId": "7074C000000q0YWQAY",
+            "MethodName": "testFindById",
+            "Outcome": "Pass",
+            "ApexClass": {
+                "attributes": {
+                    "type": "ApexClass",
+                    "url": "/services/data/v38.0/tooling/sobjects/ApexClass/01p4C0000004jK7QAI"
+                },
+                "Id": "01p4C0000004jK7QAI",
+                "Name": "PropertyControllerTest",
+                "NamespacePrefix": null
+            },
+            "RunTime": 26,
+            "FullName": "PropertyControllerTest.testFindById"
+        }
+    ]
+}
