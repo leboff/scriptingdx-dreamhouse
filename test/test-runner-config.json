@@ -70,6 +70,7 @@
         {
             "name": "setup-phantom",
             "exec": "bash",
+            "timeout": 60000,
             "args": [
                 "$WORKSPACE/test/scripts/phantom.sh",
                 "$outputDir"
