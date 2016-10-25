@@ -89,8 +89,7 @@
             "env": {
                 "SALESFORCE_ACCESS_TOKEN": "$ORG_ACCESSTOKEN",
                 "SALESFORCE_INSTANCE_URL": "$ORG_INSTANCEURL",
-                "PHANTOM_BINARY_PATH": "$outputDir/phantomjs-2.1.1-linux-x86_64/bin/phantomjs",
-                "WEBKIT_MODE": "PHANTOM"
+                "PHANTOM_BINARY_PATH": "$outputDir/phantomjs-2.1.1-linux-x86_64/bin/phantomjs"
             },
             "type": "spawn",
             "exec": "java",
@@ -117,7 +116,6 @@
             "useWorkspaceOrg": true,
             "pushSource": false,
             "beforeTests": [
-                "setup-phantom",
                 "compile-integration-tests"
             ]
         },
