@@ -160,7 +160,7 @@ Soon we'll add the following to this quick start:
 
 ## Resources
 
-For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://goo.gl/rG43Cz).
+For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://goo.gl/L0uHFf).
 
 ## Issues
 
