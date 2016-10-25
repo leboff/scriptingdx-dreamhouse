@@ -26,13 +26,12 @@ public class BaseSalesforceTest {
     private final String mode;
 
     BaseSalesforceTest() {
-        mode = getProperty("WEBKIT_MODE");
+        mode = getProperty("WEBKIT_MODE", true);
     }
 
     @Before
     public void setup() throws MalformedURLException {
         DesiredCapabilities caps = DesiredCapabilities.chrome();
-        caps.setCapability("version", "43.0");
 
         switch (mode) {
             case "PHANTOM":
@@ -85,7 +84,7 @@ public class BaseSalesforceTest {
     }
 
     public WebElement fluentWait(final By locator) {
-        int timeout = 5;
+        int timeout = 10;
 
         if (mode.equals("PHANTOM")) {
             // Phantom is much slower, it seems... for headless...
@@ -108,14 +107,22 @@ public class BaseSalesforceTest {
     };
 
     private String getProperty(String name) {
+        return getProperty(name, false);
+    }
+
+    private String getProperty(String name, Boolean allowEmpty) {
         String prop = System.getProperty(name);
 
         if (isEmpty(prop)) {
             prop = System.getenv(name);
         }
 
-        if (isEmpty(prop)) {
+        if (isEmpty(prop) && !allowEmpty) {
             throw new IllegalArgumentException("Property '" + name + "' not provided.");
+        }
+
+        if (prop == null) {
+            prop = "";
         }
 
         return prop;

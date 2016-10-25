@@ -165,5 +165,3 @@ For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer
 ## Issues
 
 Please log issues related to this repository [here](https://github.com/forcedotcom/sfdx-dreamhouse/issues).
-
-
