@@ -32,7 +32,6 @@ public class BaseSalesforceTest {
     @Before
     public void setup() throws MalformedURLException {
         DesiredCapabilities caps = DesiredCapabilities.chrome();
-        //caps.setCapability("version", "43.0");
 
         switch (mode) {
             case "PHANTOM":
