@@ -69,8 +69,8 @@
     "operations": [
         {
             "name": "setup-phantom",
-            "exec": "bash",
             "timeout": 60000,
+            "exec": "bash",            
             "args": [
                 "$WORKSPACE/test/scripts/phantom.sh",
                 "$outputDir"
@@ -78,6 +78,7 @@
         },
         {
             "name": "compile-integration-tests",
+            "timeout": 60000,
             "exec": "bash",
             "args": [
                 "$WORKSPACE/test/scripts/compile.sh",
