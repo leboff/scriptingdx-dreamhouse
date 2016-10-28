@@ -58,7 +58,7 @@ From here, you’ll authorized to interact with the hub org.
 
 ## Create a Workspace Scratch Org
 
-Next step is to create a scratch org we can use during development. The scratch org is also created through the CLI, using a config file. The DreamHouse App repository provides a few example config files. If you type cat config/workspace-scratch-def.json you can see some of the options available:
+Next step is to create a scratch org we can use during development. The scratch org is also created through the CLI, using a config file. The DreamHouse App repository provides a few example config files. If you type `cat config/workspace-scratch-def.json` you can see some of the options available:
 
 ```
 {
@@ -82,13 +82,13 @@ In less than a minute, the command should complete. You’ll get two items in th
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616524/d8c4573a-97c9-11e6-9ced-2ab8bf83ae35.png)
 
-Notice that we didn’t get a password. Given that we can type the command heroku force:org:open, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use --password to pass in a known password if required.
+Notice that we didn’t get a password. Given that we can type the command `heroku force:org:open`, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use `--password` to pass in a known password if required.
 
 At this point we have a brand new, empty, scratch org. We need to populate it with the source we first pulled out of Github. For this, we’ll use the source synchronization APIs, also available in the CLI.
 
 ## Push Source Metadata to Scratch Org
 
-To push all the local source into the scratch org, type the command: heroku force:src:push. It will take a few moments, but quickly all the metadata will be pushed into the scratch org.
+To push all the local source into the scratch org, type the command: `heroku force:src:push`. It will take a few moments, but quickly all the metadata will be pushed into the scratch org.
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616528/196668e6-97ca-11e6-900b-d63cbad55306.png)
 
