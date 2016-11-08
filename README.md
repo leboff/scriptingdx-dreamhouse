@@ -162,6 +162,35 @@ Soon we'll add the following to this quick start:
 
 For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://goo.gl/L0uHFf).
 
+## Description of Files and Directories
+
+The sfdx-dreamhouse sample repo includes a number of configuration files; some are specific to Salesforce DX while others are used by related applications such as Heroku Pipelines and CI, Eclipse, Git, or Selenium.  
+
+The following list briefly describes each configuration file, the application that uses it, and whether it is required, optional, or is simply a sample file that shows a best practice or additional examples.  See the [Salesforce DX Developer Guide](https://goo.gl/rG43Cz) for additional information.
+
+* **workspace-config.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
+* **app.json**: Required by Heroku Pipelines. Configures the Salesforce buildpack and add-on for Heroku review apps.
+* **app-ci.json**: Optional Heroku CI file.  Configures the Salesforce buildpack, add-on, and tests for the Heroku app that automatically spins up as part of CI test run.   Because the Salesforce configuration for test runs is different from the configuration for Heroku review apps, this sample app uses the optional **app-ci.json** file for configuring Heroku CI instead of **app.json**.
+* **app-ci-apex-only.json**: Sample file that shows how to run Apex tests within the context of Heroku CI. To use, rename the file **app-ci.json**.
+* **Jenkinsfile**: Required by Jenkins.  Configuration file that defines the Jenkins CI/CD pipeline logic for a project with steps to build/test/deploy etc. captured in various stages.  The sample shows how to integrate Salesforce DX CLI commands using stages.
+* **Procfile**: Optional Heroku Pipelines file.  Specifies the commands that are run by the Heroku app's dynos.  If you do not explicitly create a Procfile when using Salesforce DX with Heroku Pipelines, a default one is used.
+* **.project**:  Required by the Eclipse IDE.  Describes the Eclipse project. 
+* **.gitignore**:  Optional Git file. Specifies intentionally untracked files that you want Git (or in this case GitHub) to ignore.
+* **bin/extra-org-setup.sh**: Sample shell script that performs additional setup on a Salesforce scratch org.  Called by **bin/release**.
+* **bin/release**: Sample script file that describes the commands that are run during the release phase of a Heroku app deployment.  Called by the Heroku **Procfile**.
+* **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You can reference one of these files when you create your scratch org with the force:org:create command.   In the sfdx-dreamhouse sample, the **workspace-scratch-def.json** file is called by the **test/test-runner-config.json** file.
+* **data/\*-data.json**: Sample files for loading data into the scratch org.  For example, specify one of these files using the -f option of the force:bulk:import CLI command.
+* **test/test-runner-config.json**: Required by Test Runner, although you can name the file anything you want.  Configures all aspects of the Test Runner, such as its profiles, the tests to run, the orgs to create, the data to load, and so on.
+* **test/test.sh**: Sample script that shows how to use the Test Runner in the context of Heroku CI.  Called by the sample **app-ci.json** Heroku file.
+* **test/scripts/compile.sh**: Sample script that compiles the Selenium tests. Called by the **test/test-runner-config.json** file.
+* **test/scripts/phantom.sh**: Sample script that sets up PhantomJS, which is a scripted, headless browser used for automating testing. Called by the **test/test-runner-config.json** file.
+
+The following two directories contain source code:
+
+* **force-app**: The source for the Dreamhouse Force.com app and tests.  The name of this directory corresponds to the value of the DefaultArtifact parameter of your **workspace-config.json** file.  
+* **test/integration**: The Java source for the Selenium tests.
+
+
 ## Issues
 
 Please log issues related to this repository [here](https://github.com/forcedotcom/sfdx-dreamhouse/issues).
