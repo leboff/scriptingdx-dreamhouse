@@ -36,10 +36,6 @@
         <application>standard__Service</application>
         <visible>false</visible>
     </applicationVisibilities>
-    <applicationVisibilities>
-        <application>standard__Work</application>
-        <visible>false</visible>
-    </applicationVisibilities>
     <classAccesses>
         <apexClass>PropertyController</apexClass>
         <enabled>true</enabled>
