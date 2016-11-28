@@ -1,5 +1,6 @@
 {
  "ApiVersion": "38.0",
  "DefaultArtifact": "force-app",
- "SourceApiVersion" : "38.0"
+ "SfdcLoginUrl": "http://peterhale-wsm2.internal.salesforce.com:6109",
+ "SourceApiVersion" : "36.0"
 }
