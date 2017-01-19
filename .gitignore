@@ -2,7 +2,6 @@
 .appcloud
 .project
 .salesforce
-.settings
 node_modules
 .idea
 .tern-project
