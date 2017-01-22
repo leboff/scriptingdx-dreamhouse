@@ -168,7 +168,7 @@ The sfdx-dreamhouse sample repo includes a number of configuration files; some a
 
 The following list briefly describes each configuration file, the application that uses it, and whether it is required, optional, or is simply a sample file that shows a best practice or additional examples.  See the [Salesforce DX Developer Guide](https://goo.gl/rG43Cz) for additional information.
 
-* **workspace-config.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
+* **sdfx-workspace.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
 * **app.json**: Required by Heroku Pipelines. Configures the Salesforce buildpack and add-on for Heroku review apps.
 * **app-ci.json**: Optional Heroku CI file.  Configures the Salesforce buildpack, add-on, and tests for the Heroku app that automatically spins up as part of CI test run.   Because the Salesforce configuration for test runs is different from the configuration for Heroku review apps, this sample app uses the optional **app-ci.json** file for configuring Heroku CI instead of **app.json**.
 * **app-ci-apex-only.json**: Sample file that shows how to run Apex tests within the context of Heroku CI. To use, rename the file **app-ci.json**.

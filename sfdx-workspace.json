@@ -1,5 +1,5 @@
 {
- "ApiVersion": "38.0",
+ "SfdcLoginUrl": "http://cwall-wsl8:8081",
  "DefaultArtifact": "force-app",
  "SourceApiVersion" : "38.0"
 }
