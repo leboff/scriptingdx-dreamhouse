@@ -1,4 +1,4 @@
 {
- "DefaultArtifact": "force-app",
+ "PackageDirectories": [ { "Path" : "force-app" } ],
  "SourceApiVersion" : "38.0"
 }
