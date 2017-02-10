@@ -76,10 +76,7 @@
             "name": "integration",
             "orgs": ["dreamhouse-default"],
             "testCommand": "run-integration-tests",
-            "before": [
-                "setup-phantom",
-                "compile-integration-tests"
-            ]
+            "before": "setup-phantom"
         },
         {
             "name": "master",

@@ -1,4 +1,10 @@
 {
- "PackageDirectories": [ { "Path" : "force-app" } ],
- "SourceApiVersion" : "38.0"
+  "PackageDirectories": [
+    {
+      "Path": "force-app"
+    }
+  ],
+  "Namespace": "",
+  "SfdcLoginUrl": "https://login.salesforce.com",
+  "SourceApiVersion": "38.0"
 }

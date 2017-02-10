@@ -2,7 +2,7 @@
 
 ## Salesforce DX Quick Start
 
-> **Important:** Salesforce DX is available as a developer preview. Salesforce DX isn’t generally available unless or until Salesforce announces its general availability in documentation or in press releases or public statements. All commands, parameters, and other features are subject to change or deprecation at any time, with or without notice. Don't implement functionality developed with these commands or tools.</td>
+> **Important:** Salesforce DX is available as a Pilot. Salesforce DX isn’t generally available unless or until Salesforce announces its general availability in documentation or in press releases or public statements. All commands, parameters, and other features are subject to change or deprecation at any time, with or without notice. Take care when implementing functionality developed with these commands or tools.</td>
 
 The Salesforce Developer Experience (SFDX) starts with source code living in your version control system (VCS). It doesn’t matter which VCS you use, only that you use one. In this quick start, we’ll assume you’re using Git and Github, as this is where we’ve stored the Dreamforce ’16 Developer Keynote sample application, called the DreamHouse app, which we will use for this quick start.
 
@@ -32,7 +32,7 @@ In SFDX we provide a comprehensive set of capabilities through our new command-l
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616512/78c36060-97c9-11e6-9983-1a655a733a9d.png)
 
-## Authorize the Environment Hub
+## Authorize the Developer Hub
 
 To try out our application, we’ll first have to authorize with our environment hub. The environment hub provides a place to create and attach all of the orgs we’ll use throughout the full development lifecycle – not only scratch orgs, but also sandbox and production environments.
 
@@ -40,7 +40,7 @@ There are two ways to authorize with the environment hub – using a traditional
 
 To authorize, start with the CLI:
 
-    heroku force:org:authorize
+    sfdx force:auth:web:login -d -a "Hub Org"
 
 A web-browser will open, allowing you to log in:
 
@@ -54,7 +54,11 @@ Once logged in, the CLI has been authorized.
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616515/9ded635e-97c9-11e6-900e-cc6acf9d92ba.png)
 
-From here, you’ll authorized to interact with the hub org.
+If you already have an authorized Developer Hub, set it as the workspace default:
+
+    sfdx force:config:set defaultdevhubusername=<username|alias>
+
+From here, you’re authorized to interact with the developer hub org.
 
 ## Create a Workspace Scratch Org
 
@@ -62,21 +66,20 @@ Next step is to create a scratch org we can use during development. The scratch 
 
 ```
 {
-  "Company": "ACME Org",
+  "Company": "Your Company",
   "Country": "US",
-  "LastName": "Your Last Name",
-  "SignupEmail": "your@email.com",
-  "Edition": "Enterprise",
+  "LastName": "lastnane",
+  "Email": "xxx@xxx.com",
+  "Edition": "Developer",
   "OrgPreferences" : {
-     "S1DesktopEnabled" : true,
-     "ChatterEnabled" ": false
+    "S1DesktopEnabled" : true
   }
 }
 ```
 
 To create the scratch org, type the following command in the CLI:
 
-    heroku force:org:create --file config/workspace-scratch-def.json
+    sfdx force:org:create -s -f config/workspace-scratch-def.json
 
 In less than a minute, the command should complete. You’ll get two items in the output: the Org ID and the username.
 
@@ -85,6 +88,10 @@ In less than a minute, the command should complete. You’ll get two items in th
 Notice that we didn’t get a password. Given that we can type the command `heroku force:org:open`, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use `--password` to pass in a known password if required.
 
 At this point we have a brand new, empty, scratch org. We need to populate it with the source we first pulled out of Github. For this, we’ll use the source synchronization APIs, also available in the CLI.
+
+If you want to use an existing scratch org, set it as the workspace default:
+
+    sfdx force:config:set defaultausername=<username|alias>
 
 ## Push Source Metadata to Scratch Org
 
@@ -96,7 +103,7 @@ To push all the local source into the scratch org, type the command: `heroku for
 
 At this point we’re close to being able to run the DreamHouse app. But, the DreamHouse app uses a permission set to provide access to the app. You can see this in the source that was pushed into the org. Before we can access the app, we need to assign that permset using the CLI:
 
-    heroku force:permset:assign -n DreamHouse
+    sfdx force:user:permset:assign -n Dreamhouse
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616529/3cee3046-97ca-11e6-8125-18643db2ab50.png)
 
@@ -104,7 +111,7 @@ At this point we’re close to being able to run the DreamHouse app. But, the Dr
 
 Lastly, we don’t have any of the DreamHouse app data in the org. But we do have sample data in our repository. Using the CLI, we can use the SObject Tree API to import this data into the org.
 
-    heroku force:data:import --plan data/sample-data-plan.json
+    sfdx force:data:tree:import --plan data/sample-data-plan.json
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616537/5b1ee268-97ca-11e6-8533-938e1fde73e1.png)
 
@@ -149,14 +156,6 @@ Now, at this point we could push this back into source control. But first, let�
     heroku force:test --config test/test-runner-config.json --profile local
 
 This command will run the local profile that’s specified in the test runner config. By default, this is setup to run all our Apex tests and Selenium tests. All the Selenium jars and binaries will get downloaded as part of the execution of the test runner.
-
-## More to Come
-
-Soon we'll add the following to this quick start:
-
-* Details on setting up Heroku Pipelines
-* Details on setting up Heroku CI
-* Process for kicking off Continuous Integration and Continuous Delivery with Heroku Flow
 
 ## Resources
 
