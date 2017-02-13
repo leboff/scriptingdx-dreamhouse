@@ -19,7 +19,7 @@
     ],
     "scripts": {
         "test-setup": "node .salesforce/force.js release",
-        "test": "heroku force:apex:test --reporter tap"
+        "test": "heroku force:apex:test:run --r tap"
     },
     "env": {
     }
