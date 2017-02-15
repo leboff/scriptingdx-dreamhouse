@@ -9,6 +9,8 @@ set -u
 
 OUTPUT_DIR=$1
 PHANTOM_VER=2.1.1
+PHANTOM_PATH_OSX=phantomjs-$PHANTOM_VER-macosx
+PHANTOM_FILE_OSX=$PHANTOM_PATH_OSX.zip
 PHANTOM_PATH=phantomjs-$PHANTOM_VER-linux-x86_64
 PHANTOM_FILE=$PHANTOM_PATH.tar.bz2
 PHANTOM_URL=https://github.com/Medium/phantomjs/releases/download/v$PHANTOM_VER/$PHANTOM_FILE
