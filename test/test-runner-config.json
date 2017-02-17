@@ -18,55 +18,12 @@
     ],
     "suites": [
         {
-            "name": "basic-apex",
-            "categories": [
-                {
-                    "type": "apex",
-                    "tests": [
-                        "PropertyControllerTest"
-                    ]
-                }
-            ]
-        },{
             "name": "integration",
-            "categories": [
-                {
-                    "type": "run-integration-tests",
-                    "tests": ["test.integration.IntegrationTest"]
-                }
-            ],
+            "suiteNames": ["test.integration.IntegrationTest"],
             "data": ["dreamhouse-data"]
         }
     ],
-    "environments": [
-        {
-            "name": "dreamhouse",
-            "orgs": [
-                "dreamhouse-default"
-            ]
-        }
-    ],
-    "invocations": [
-        {
-            "name": "basic",
-            "environments": [
-                "dreamhouse"
-            ],
-            "suites": [
-                "basic-apex"
-            ]
-        },{
-            "name": "all-tests",
-            "environments": [
-                "dreamhouse"
-            ],
-            "suites": [
-                "basic-apex",
-                "integration"
-            ]
-        }
-    ],
-    "operations": [
+    "commands": [
         {
             "name": "setup-phantom",
             "timeout": 60000,
@@ -97,7 +54,7 @@
             "args": [
                 "-cp",
                 ".:$outputDir/selenium-2.53.1/*:$outputDir/selenium-2.53.1/libs/*:$outputDir",
-                "$TESTS"
+                "$TEST_VAL"
             ]
         }
     ],
@@ -105,58 +62,32 @@
         {
             "name": "local",
             "useWorkspaceOrg": true,
-            "pushSource": false,
-            "overrides": {
-                "settings": {
-                    "selenium": false
-                }
-            }
-        },
-        {
-            "name": "local-with-selenium",
-            "useWorkspaceOrg": true,
-            "pushSource": false,
-            "beforeTests": [
-                "compile-integration-tests"
-            ]
-        },
-        {
-            "name": "heroku-basic",
-            "overrides": {
-                "settings": {
-                    "selenium": false
-                }
-            }
-        },
-        {
-            "name": "heroku-ci",
-            "beforeTests": [
-                "setup-phantom",
-                "compile-integration-tests"
-            ]
+            "pushSource": false
         }
     ],
-    "profiles": [
-        {
-            "name": "local",
-            "context": "local-with-selenium",
-            "default": true,
-            "invocations": [
-                "all-tests"
-            ]
-        },
+    "jobs": [
         {
             "name": "basic",
-            "context": "heroku-basic",
-            "invocations": [
-                "basic"
+            "orgs": ["dreamhouse-default"],
+            "testCommand": "apex",
+            "tests": ["PropertyControllerTest"]
+        },
+        {
+            "name": "integration",
+            "orgs": ["dreamhouse-default"],
+            "testCommand": "run-integration-tests",
+            "suites": ["integration"],
+            "before": [
+                "setup-phantom",
+                "compile-integration-tests"
             ]
         },
         {
             "name": "master",
-            "context": "heroku-ci",
-            "invocations": [
-                "all-tests"
+            "default": true,
+            "refs": [
+                "basic",
+                "integration"
             ]
         }
     ]
