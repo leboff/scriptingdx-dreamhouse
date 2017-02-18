@@ -8,7 +8,7 @@ The Salesforce Developer Experience (SFDX) starts with source code living in you
 
 ## Set Up the Developer Workspace
 
-Our first goal is to set up a developer workspace for us to use to modify our application. It starts by cloning the repository. Use the command ...
+Our first goal is to set up a developer workspace which we'll use to modify our application. It starts by cloning the repository. Use the command ...
 
     git clone https://github.com/forcedotcom/sfdx-dreamhouse.git
 
@@ -32,13 +32,13 @@ In SFDX we provide a comprehensive set of capabilities through our new command-l
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616512/78c36060-97c9-11e6-9983-1a655a733a9d.png)
 
-## Authorize the Developer Hub
+## Authorize the Developer Hub Org
 
-To try out our application, we’ll first have to authorize with our environment hub. The environment hub provides a place to create and attach all of the orgs we’ll use throughout the full development lifecycle – not only scratch orgs, but also sandbox and production environments.
+To try out our application, we’ll first have to authorize with our Developer Hub (Dev Hub) org. The Dev Hub org provides a place to create and attach all of the orgs we’ll use throughout the full development lifecycle – not only scratch orgs, but also sandbox and production environments.
 
-There are two ways to authorize with the environment hub – using a traditional OAuth Web Server flow, where the user interactively logs in through a browser, or the JWT OAuth flow, in which you can use certificates to facilitate non-interactive logins. The latter is particularly useful for automated processes that are not able to interactively log in. For this document, we will use the OAuth Web Server flow and interactive login to the org.
+There are two ways to authorize with the Dev Hub org – using a traditional OAuth Web Server flow, where the user interactively logs in through a browser, or the JWT OAuth flow, in which you can use certificates to facilitate non-interactive logins. The latter is particularly useful for automated processes that are not able to interactively log in. For this document, we will use the OAuth Web Server flow and interactive login to the org.
 
-To authorize, start with the CLI:
+To authorize the Dev Hub org, set it as your workspace default, and give it an alias, run this CLI command:
 
     sfdx force:auth:web:login -d -a "Hub Org"
 
@@ -54,11 +54,13 @@ Once logged in, the CLI has been authorized.
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616515/9ded635e-97c9-11e6-900e-cc6acf9d92ba.png)
 
-If you already have an authorized Developer Hub, set it as the workspace default:
+If you already have an authorized Dev Hub org, set it as the workspace default:
 
     sfdx force:config:set defaultdevhubusername=<username|alias>
 
-From here, you’re authorized to interact with the developer hub org.
+Use the CLI command `sfdx force:org:list` to display the usernames and aliases for all the orgs you've authorized or created. 
+
+From here, you’re authorized to interact with the Dev Hub org.
 
 ## Create a Workspace Scratch Org
 
@@ -77,9 +79,9 @@ Next step is to create a scratch org we can use during development. The scratch 
 }
 ```
 
-To create the scratch org, type the following command in the CLI:
+To create the scratch org, set it as your default, and give it an alias, type this CLI command:
 
-    sfdx force:org:create -s -f config/workspace-scratch-def.json
+    sfdx force:org:create -s -f config/workspace-scratch-def.json -a "default scratch org"
 
 In less than a minute, the command should complete. You’ll get two items in the output: the Org ID and the username.
 
@@ -95,13 +97,17 @@ If you want to use an existing scratch org, set it as the workspace default:
 
 ## Push Source Metadata to Scratch Org
 
-To push all the local source into the scratch org, type the command: `sfdx force:source:push`. It will take a few moments, but soon enough all the metadata will be pushed into the scratch org.
+To push all the local source into the scratch org, type the command: 
+
+    sfdx force:source:push
+    
+It will take a few moments, but soon all the metadata will be pushed into the scratch org.
 
 ![image](https://cloud.githubusercontent.com/assets/746259/19616528/196668e6-97ca-11e6-900b-d63cbad55306.png)
 
 ## Assign a Permset to the DreamHouse App
 
-At this point we’re close to being able to run the DreamHouse app. But, the DreamHouse app uses a permission set to provide access to the app. You can see this in the source that was pushed into the org. Before we can access the app, we need to assign that permset using the CLI:
+At this point we’re close to being able to run the DreamHouse app. But if you look at the source that was pushed to the org you'll see that the app uses a permission set to provide access.  Before we can access the app, we need to assign that permset using the CLI:
 
     sfdx force:user:permset:assign -n Dreamhouse
 
@@ -109,7 +115,7 @@ At this point we’re close to being able to run the DreamHouse app. But, the Dr
 
 ## Import Test Data
 
-Lastly, we don’t have any of the DreamHouse app data in the org. But we do have sample data in our repository. Using the CLI, we can use the SObject Tree API to import this data into the org.
+Finally, we don’t have any of the DreamHouse app data in the org. But we do have sample data in our repository. Using the CLI, we can use the SObject Tree API to import this data into the org.
 
     sfdx force:data:tree:import --plan data/sample-data-plan.json
 
@@ -151,7 +157,7 @@ You’re now able to use Eclipse to update your project and it’s fully integra
 
 ## Test the Application Using the Test Runner
 
-Now, at this point we could push this back into source control. But first, let’s ensure all our unit tests pass. For this, we’ll use the new test runner that’s integrated into the CLI.
+We could now push our code changes back into our version control system. But first, let’s ensure all our unit tests pass. For this, we’ll use the new Test Runner that’s integrated into the CLI.
 
     sfdx force:testrunner:run --configfile test/test-runner-config.json --jobname master
 
