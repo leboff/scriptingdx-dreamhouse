@@ -30,7 +30,7 @@ Now you’re working in your own branch, making it easier to submit updates to y
 
 In SFDX we provide a comprehensive set of capabilities through our new command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing `sfdx force --help`.
 
-![image](https://cloud.githubusercontent.com/assets/746259/19616512/78c36060-97c9-11e6-9983-1a655a733a9d.png)
+![image](https://cloud.githubusercontent.com/assets/22328844/23097228/71a190c2-f5e3-11e6-9973-0a637c72ad20.png)
 
 ## Authorize the Developer Hub Org
 
@@ -52,7 +52,7 @@ You’ll next need to authorize the SFDX "Global Connected App".
 
 Once logged in, the CLI has been authorized.
 
-![image](https://cloud.githubusercontent.com/assets/746259/19616515/9ded635e-97c9-11e6-900e-cc6acf9d92ba.png)
+![image](https://cloud.githubusercontent.com/assets/22328844/23097224/6743cc3a-f5e3-11e6-9b64-e8ee932b8c1c.png)
 
 If you already have an authorized Dev Hub org, set it as the workspace default:
 
@@ -85,7 +85,7 @@ To create the scratch org, set it as your default, and give it an alias, type th
 
 In less than a minute, the command should complete. You’ll get two items in the output: the Org ID and the username.
 
-![image](https://cloud.githubusercontent.com/assets/746259/19616524/d8c4573a-97c9-11e6-9ced-2ab8bf83ae35.png)
+![image](https://cloud.githubusercontent.com/assets/22328844/23097225/694939ca-f5e3-11e6-9699-1120f82fa77b.png)
 
 Notice that we didn’t get a password. Given that we can type the command `sfdx force:org:open`, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use `--password` to pass in a known password if required.
 
@@ -111,7 +111,7 @@ At this point we’re close to being able to run the DreamHouse app. But if you 
 
     sfdx force:user:permset:assign -n Dreamhouse
 
-![image](https://cloud.githubusercontent.com/assets/746259/19616529/3cee3046-97ca-11e6-8125-18643db2ab50.png)
+![image](https://cloud.githubusercontent.com/assets/22328844/23097229/73628920-f5e3-11e6-932a-6782e90e1393.png)
 
 ## Import Test Data
 
@@ -119,7 +119,7 @@ Finally, we don’t have any of the DreamHouse app data in the org. But we do ha
 
     sfdx force:data:tree:import --plan data/sample-data-plan.json
 
-![image](https://cloud.githubusercontent.com/assets/746259/19616537/5b1ee268-97ca-11e6-8533-938e1fde73e1.png)
+![image](https://cloud.githubusercontent.com/assets/22328844/23097226/6de62330-f5e3-11e6-916f-744cf26dc8ab.png)
 
 Now we’ve fully setup and configured our developer workspace. We’re ready to begin development.
 
