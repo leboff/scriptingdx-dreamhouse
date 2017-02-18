@@ -28,7 +28,7 @@ Cloning the repository pulls all the source code to the local filesystem. Before
 
 Now you’re working in your own branch, making it easier to submit updates to your team later on.
 
-In SFDX we provide a comprehensive set of capabilities through our new command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing `sfdx force --help`.
+In SFDX we provide a comprehensive set of capabilities through our command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing `sfdx force --help`.
 
 ![image](https://cloud.githubusercontent.com/assets/22328844/23097228/71a190c2-f5e3-11e6-9973-0a637c72ad20.png)
 
@@ -157,7 +157,7 @@ You’re now able to use Eclipse to update your project and it’s fully integra
 
 ## Test the Application Using the Test Runner
 
-We could now push our code changes back into our version control system. But first, let’s ensure all our unit tests pass. For this, we’ll use the new Test Runner that’s integrated into the CLI.
+We could now push our code changes back into our version control system. But first, let’s ensure all our unit tests pass. For this, we’ll use the Test Runner that’s integrated into the CLI.
 
     sfdx force:testrunner:run --configfile test/test-runner-config.json --jobname master
 
