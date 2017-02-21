@@ -84,8 +84,10 @@ public class BaseSalesforceTest {
     }
 
     public WebElement fluentWait(final By locator) {
-        int timeout = 30;
+        return fluentWait(locator, 30);
+    }
 
+    public WebElement fluentWait(final By locator, int timeout) {
         if (mode.equals("PHANTOM")) {
             // Phantom is much slower, it seems... for headless...
             timeout = 40;

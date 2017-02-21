@@ -3,7 +3,7 @@
 	<aura:attribute name="property" type="Property__c"/>
 	<aura:registerEvent name="navigateToSObject" type="force:navigateToSObject"/>
     
-	<a onclick="{!c.navigateToDetailsView}">
+	<a id="{!v.property.Title__c}" onclick="{!c.navigateToDetailsView}">
     	<div style="{! 'background-image:url(' + v.property.Thumbnail__c + ')'}">
         	<div>
             	<h1>{!v.property.Title__c}</h1>
