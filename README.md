@@ -93,7 +93,7 @@ At this point we have a brand new, empty, scratch org. We need to populate it wi
 
 If you want to use an existing scratch org, set it as the workspace default:
 
-    sfdx force:config:set defaultausername=<username|alias>
+    sfdx force:config:set defaultusername=<username|alias>
 
 ## Push Source Metadata to Scratch Org
 
