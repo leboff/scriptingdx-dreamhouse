@@ -1,6 +1,6 @@
 {
     "settings": {
-        "outputDir": "$WORKSPACE/test/artifacts",
+        "outputDir": "$WORKSPACE/test/artifacts/$DATETIME[X]",
         "selenium": true
     },
     "data": [
@@ -14,6 +14,16 @@
             "name": "dreamhouse-default",
             "definition": "config/workspace-scratch-def.json",
             "permsets": ["Dreamhouse"]
+        }, {
+            "name": "dreamhouse-aloha",
+            "base": "dreamhouse-default",
+            "definition": {
+                "OrgPreferences": {
+                    "S1DesktopEnabled": false
+                }
+            },
+            "permsets": ["Dreamhouse"],
+            "data": ["dreamhouse-data"]
         }
     ],
     "suites": [
@@ -83,11 +93,27 @@
             ]
         },
         {
+            "name": "integration-aloha",
+            "orgs": ["dreamhouse-aloha"],
+            "testCommand": "run-integration-tests",
+            "tests": ["test.integration.IntegrationAlohaTest"],
+            "before": [
+                "setup-phantom",
+                "compile-integration-tests"
+            ]
+        },
+        {
             "name": "master",
             "default": true,
             "refs": [
                 "basic",
                 "integration"
+            ]
+        }, {
+            "name": "master-aloha",
+            "refs": [
+                "basic",
+                "integration-aloha"
             ]
         }
     ]
