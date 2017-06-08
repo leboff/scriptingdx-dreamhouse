@@ -68,13 +68,13 @@ Next step is to create a scratch org we can use during development. The scratch 
 
 ```
 {
-  "Company": "Your Company",
-  "Country": "US",
-  "LastName": "lastnane",
-  "Email": "xxx@xxx.com",
-  "Edition": "Developer",
-  "OrgPreferences" : {
-    "S1DesktopEnabled" : true
+  "company": "Your Company",
+  "edition": "Developer",
+  "orgPreferences" : {
+  	"enabled": [
+  	  "S1DesktopEnabled"
+  	],
+  	"disabled": []
   }
 }
 ```
@@ -169,21 +169,16 @@ For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer
 
 ## Description of Files and Directories
 
-* **sdfx-workspace.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
+* **sdfx-project.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
 * **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You  reference one of these files when you create your scratch org with the force:org:create command.   In the sfdx-dreamhouse sample, the **project-scratch-def.json** file is also called by the **test/test-runner-config.json** file.
 * **data/\*-data.json**: Sample files for loading data into the scratch org.  
 * **Jenkinsfile**: Configuration file that defines the Jenkins CI/CD pipeline logic for a project with steps to build/test/deploy etc. captured in various stages.  The sample shows how to integrate Salesforce DX CLI commands using stages.
-* **test/test-runner-config.json**: Required by Test Runner, although you can name the file anything you want.  Configures all aspects of the Test Runner, such as its jobs, the tests to run, the orgs to create, the data to load, and so on.
-* **test/scripts/compile.sh**: Sample script that compiles the Selenium tests. Called by the **test/test-runner-config.json** file.
-* **test/scripts/phantom.sh**: Sample script that sets up PhantomJS, which is a scripted, headless browser used for automating testing. Called by the **test/test-runner-config.json** file.
-* **.forceignore**: Optional Salesforce DX file. Lists the directories and files that you want force:source:push/pull to ignore.
 * **.project**:  Required by the Eclipse IDE.  Describes the Eclipse project. 
 * **.gitignore**:  Optional Git file. Specifies intentionally untracked files that you want Git (or in this case GitHub) to ignore.
 
 The following two directories contain source code:
 
 * **force-app**: The source for the Dreamhouse Force.com app and tests.  The name of this directory corresponds to the value of the DefaultArtifact parameter of your **sfdx-project.json** file.  
-* **test/integration**: The Java source for the Selenium tests.
 
 
 ## Issues
