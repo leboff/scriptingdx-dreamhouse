@@ -64,7 +64,7 @@ From here, you’re authorized to interact with the Dev Hub org.
 
 ## Create a Workspace Scratch Org
 
-Next step is to create a scratch org we can use during development. The scratch org is also created through the CLI, using a config file. The DreamHouse App repository provides a few example config files. If you type `cat config/workspace-scratch-def.json` you can see some of the options available:
+Next step is to create a scratch org we can use during development. The scratch org is also created through the CLI, using a config file. The DreamHouse App repository provides a few example config files. If you type `cat config/project-scratch-def.json` you can see some of the options available:
 
 ```
 {
@@ -81,7 +81,7 @@ Next step is to create a scratch org we can use during development. The scratch 
 
 To create the scratch org, set it as your default, and give it an alias, type this CLI command:
 
-    sfdx force:org:create -s -f config/workspace-scratch-def.json -a "default scratch org"
+    sfdx force:org:create -s -f config/project-scratch-def.json -a "default scratch org"
 
 In less than a minute, the command should complete. You’ll get two items in the output: the Org ID and the username.
 
@@ -170,7 +170,7 @@ For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer
 ## Description of Files and Directories
 
 * **sdfx-workspace.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
-* **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You  reference one of these files when you create your scratch org with the force:org:create command.   In the sfdx-dreamhouse sample, the **workspace-scratch-def.json** file is also called by the **test/test-runner-config.json** file.
+* **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You  reference one of these files when you create your scratch org with the force:org:create command.   In the sfdx-dreamhouse sample, the **project-scratch-def.json** file is also called by the **test/test-runner-config.json** file.
 * **data/\*-data.json**: Sample files for loading data into the scratch org.  
 * **Jenkinsfile**: Configuration file that defines the Jenkins CI/CD pipeline logic for a project with steps to build/test/deploy etc. captured in various stages.  The sample shows how to integrate Salesforce DX CLI commands using stages.
 * **test/test-runner-config.json**: Required by Test Runner, although you can name the file anything you want.  Configures all aspects of the Test Runner, such as its jobs, the tests to run, the orgs to create, the data to load, and so on.
@@ -182,7 +182,7 @@ For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer
 
 The following two directories contain source code:
 
-* **force-app**: The source for the Dreamhouse Force.com app and tests.  The name of this directory corresponds to the value of the DefaultArtifact parameter of your **workspace-config.json** file.  
+* **force-app**: The source for the Dreamhouse Force.com app and tests.  The name of this directory corresponds to the value of the DefaultArtifact parameter of your **sfdx-project.json** file.  
 * **test/integration**: The Java source for the Selenium tests.
 
 
