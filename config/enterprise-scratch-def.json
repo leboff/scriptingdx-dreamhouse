@@ -1,11 +1,12 @@
 {
-  "Company": "Your Company",
-  "Country": "US",
-  "LastName": "lastname",
-  "Email": "yourname@example.com",
-  "Edition": "Enterprise",
-  "OrgPreferences" : {
-     "S1DesktopEnabled" : true,
-     "ChatterEnabled" : false
+  "company": "Your Company",
+  "edition": "Enterprise",
+  "orgPreferences" : {
+  	"enabled": [
+  	  "S1DesktopEnabled"
+  	],
+  	"disabled": [
+	  "ChatterEnabled"
+  	]
   }
 }
