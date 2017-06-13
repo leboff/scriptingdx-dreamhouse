@@ -1,12 +1,12 @@
 {
-  "company": "Your Company",
+  "orgName": "Your Company",
   "edition": "Enterprise",
-  "orgPreferences" : {
-  	"enabled": [
-  	  "S1DesktopEnabled"
-  	],
-  	"disabled": [
-	  "ChatterEnabled"
-  	]
+  "orgPreferences": {
+    "enabled": [
+      "S1DesktopEnabled"
+    ],
+    "disabled": [
+      "ChatterEnabled"
+    ]
   }
 }
