@@ -2,13 +2,13 @@
 
 ## Salesforce DX Quick Start
 
-> **Important:** Salesforce DX is available as a Pilot. Salesforce DX isn’t generally available unless or until Salesforce announces its general availability in documentation or in press releases or public statements. All commands, parameters, and other features are subject to change or deprecation at any time, with or without notice. Take care when implementing functionality developed with these commands or tools.</td>
+> **Important:** Salesforce DX is available as a Beta. Salesforce DX isn’t generally available unless or until Salesforce announces its general availability in documentation or in press releases or public statements. All commands, parameters, and other features are subject to change or deprecation at any time, with or without notice. Take care when implementing functionality developed with these commands or tools.</td>
 
 The Salesforce Developer Experience (SFDX) starts with source code living in your version control system (VCS). It doesn’t matter which VCS you use, only that you use one. In this quick start, we’ll assume you’re using Git and Github, as this is where we’ve stored the Dreamforce ’16 Developer Keynote sample application, called the DreamHouse app, which we will use for this quick start.
 
-## Set Up the Developer Workspace
+## Set Up the Developer Project
 
-Our first goal is to set up a developer workspace which we'll use to modify our application. It starts by cloning the repository. Use the command ...
+Our first goal is to set up a developer project which we'll use to modify our application. It starts by cloning the repository. Use the command ...
 
     git clone https://github.com/forcedotcom/sfdx-dreamhouse.git
 
@@ -28,7 +28,7 @@ Cloning the repository pulls all the source code to the local filesystem. Before
 
 Now you’re working in your own branch, making it easier to submit updates to your team later on.
 
-In SFDX we provide a comprehensive set of capabilities through our command-line interface, which is shipped as a Heroku plugin. You can take a look at all of the available commands by typing `sfdx force --help`.
+In SFDX we provide a comprehensive set of capabilities through our command-line interface. You can take a look at all of the available commands by typing `sfdx force --help`.
 
 ![image](https://cloud.githubusercontent.com/assets/22328844/23097228/71a190c2-f5e3-11e6-9973-0a637c72ad20.png)
 
@@ -54,7 +54,7 @@ Once logged in, the CLI has been authorized.
 
 ![image](https://cloud.githubusercontent.com/assets/22328844/23097224/6743cc3a-f5e3-11e6-9b64-e8ee932b8c1c.png)
 
-If you already have an authorized Dev Hub org, set it as the workspace default:
+If you already have an authorized Dev Hub org, set it as the default:
 
     sfdx force:config:set defaultdevhubusername=<username|alias>
 
@@ -62,7 +62,7 @@ Use the CLI command `sfdx force:org:list` to display the usernames and aliases f
 
 From here, you’re authorized to interact with the Dev Hub org.
 
-## Create a Workspace Scratch Org
+## Create a Scratch Org
 
 Next step is to create a scratch org we can use during development. The scratch org is also created through the CLI, using a config file. The DreamHouse App repository provides a few example config files. If you type `cat config/project-scratch-def.json` you can see some of the options available:
 
@@ -87,11 +87,11 @@ In less than a minute, the command should complete. You’ll get two items in th
 
 ![image](https://cloud.githubusercontent.com/assets/22328844/23097225/694939ca-f5e3-11e6-9699-1120f82fa77b.png)
 
-Notice that we didn’t get a password. Given that we can type the command `sfdx force:org:open`, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password. Of course, we can use `--password` to pass in a known password if required.
+Notice that we didn’t get a password. Given that we can type the command `sfdx force:org:open`, which uses the Salesforce front door to automatically login with a cached authentication token, there’s no explicit need for us to know the password.
 
 At this point we have a brand new, empty, scratch org. We need to populate it with the source we first pulled out of Github. For this, we’ll use the source synchronization APIs, also available in the CLI.
 
-If you want to use an existing scratch org, set it as the workspace default:
+If you want to use an existing scratch org, set it as the default:
 
     sfdx force:config:set defaultusername=<username|alias>
 
@@ -121,9 +121,9 @@ Finally, we don’t have any of the DreamHouse app data in the org. But we do ha
 
 ![image](https://cloud.githubusercontent.com/assets/22328844/23097226/6de62330-f5e3-11e6-916f-744cf26dc8ab.png)
 
-Now we’ve fully setup and configured our developer workspace. We’re ready to begin development.
+Now we’ve fully setup and configured our project. We’re ready to begin development.
 
-## Open the WorkSpace Scratch Org
+## Open the Scratch Org
 
 We can try out the application by opening our scratch org: `sfdx force:org:open`. Notice you won’t have to log in!
 
@@ -155,22 +155,14 @@ Click through the wizard, and then switch to the Project Explorer. You’ll see 
 
 You’re now able to use Eclipse to update your project and it’s fully integrated into the Git repository.
 
-## Test the Application Using the Test Runner
-
-We could now push our code changes back into our version control system. But first, let’s ensure all our unit tests pass. For this, we’ll use the Test Runner that’s integrated into the CLI.
-
-    sfdx force:testrunner:run --configfile test/test-runner-config.json --jobname master
-
-This command will run the master job that’s specified in the test runner config. By default, this is setup to run all our Apex tests and Selenium tests. All the Selenium jars and binaries will get downloaded as part of the execution of the test runner.
-
 ## Resources
 
-For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://org62.my.salesforce.com/0690M000006LTcY).
+For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev).
 
 ## Description of Files and Directories
 
-* **sdfx-project.json**: Required by Salesforce DX. Configures your workspace.  Use this file to specify the parameters that affect your Salesforce development project.
-* **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You  reference one of these files when you create your scratch org with the force:org:create command.   In the sfdx-dreamhouse sample, the **project-scratch-def.json** file is also called by the **test/test-runner-config.json** file.
+* **sdfx-project.json**: Required by Salesforce DX. Configures your project.  Use this file to specify the parameters that affect your Salesforce development project.
+* **config/\*-scratch-def.json**: Sample files that show how to define the shape of a scratch org.  You  reference one of these files when you create your scratch org with the force:org:create command.   
 * **data/\*-data.json**: Sample files for loading data into the scratch org.  
 * **Jenkinsfile**: Configuration file that defines the Jenkins CI/CD pipeline logic for a project with steps to build/test/deploy etc. captured in various stages.  The sample shows how to integrate Salesforce DX CLI commands using stages.
 * **.project**:  Required by the Eclipse IDE.  Describes the Eclipse project. 
