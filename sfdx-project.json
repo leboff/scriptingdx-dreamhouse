@@ -1,7 +1,11 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app"
+      "path": "src/common",
+      "default": true
+    },
+    {
+      "path": "src/ui"
     }
   ],
   "namespace": "",
