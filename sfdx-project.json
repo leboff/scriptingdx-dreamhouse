@@ -9,6 +9,5 @@
     }
   ],
   "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "39.0"
+  "sfdcLoginUrl": "https://login.salesforce.com"
 }
