@@ -1,6 +1,6 @@
 # SFDX Dreamhouse App
 
-[![Deploy](https://deploy-to-sfdx.herokuapp.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.herokuapp.com/deploy?template=https://github.com/wadewegner/sfdx-dreamhouse)
+[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/deploy?template=https://github.com/wadewegner/sfdx-dreamhouse)
 
 ## Salesforce DX Quick Start
 
