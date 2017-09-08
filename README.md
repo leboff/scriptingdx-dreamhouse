@@ -157,7 +157,7 @@ You’re now able to use Eclipse to update your project and it’s fully integra
 
 ## Resources
 
-For details on using sfdx-dreamhouse, please review the [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev).
+For more information on using SFDX, please review the [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev).
 
 ## Description of Files and Directories
 
