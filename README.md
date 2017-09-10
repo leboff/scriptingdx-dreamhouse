@@ -1,5 +1,7 @@
 # SFDX Dreamhouse App
 
+[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
+
 ## Salesforce DX Quick Start
 
 > **Important:** Salesforce DX is available as a Beta. Salesforce DX isn’t generally available unless or until Salesforce announces its general availability in documentation or in press releases or public statements. All commands, parameters, and other features are subject to change or deprecation at any time, with or without notice. Take care when implementing functionality developed with these commands or tools.</td>
