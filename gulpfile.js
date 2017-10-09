@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var sfdx = require('gulp-sfdx');
+var sfdx = require('sfdx-node');
 var yargs = require('yargs');
 gulp.task('init', () => {
     return createScratchOrg()

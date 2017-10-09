@@ -18,10 +18,10 @@
   "homepage": "https://github.com/forcedotcom/sfdx-dreamhouse#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-sfdx": "file:///Users/leboff/Google Drive/projects/gulp-sfdx",
     "yargs": "^9.0.1"
   },
   "dependencies": {
+    "sfdx-node": "git+ssh://git@appirio.githost.io:AppirioDx/sfdx-node.git",    
     "salesforce-alm": "^40.10.0"
   }
 }
