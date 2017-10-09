@@ -1,0 +1,27 @@
+{
+  "name": "scrdx-dreamhouse",
+  "version": "1.0.0",
+  "description": "[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forcedotcom/sfdx-dreamhouse.git"
+  },
+  "author": "Bryan Leboff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/forcedotcom/sfdx-dreamhouse/issues"
+  },
+  "homepage": "https://github.com/forcedotcom/sfdx-dreamhouse#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sfdx": "file:///Users/leboff/Google Drive/projects/gulp-sfdx",
+    "yargs": "^9.0.1"
+  },
+  "dependencies": {
+    "salesforce-alm": "^40.10.0"
+  }
+}

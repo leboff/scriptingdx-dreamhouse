@@ -9,5 +9,6 @@
     }
   ],
   "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com"
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "softExit": true
 }
