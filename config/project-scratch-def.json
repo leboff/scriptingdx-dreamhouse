@@ -1,7 +1,10 @@
 {
-    "orgName": "ccoenraets Company",
+    "orgName": "Your Company",
     "edition": "Developer",
-    "orgPreferences" : {
-        "enabled": ["S1DesktopEnabled"]
+    "orgPreferences": {
+      "enabled": [
+        "S1DesktopEnabled"
+      ],
+      "disabled": []
     }
 }

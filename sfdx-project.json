@@ -1,13 +1,11 @@
 {
   "packageDirectories": [
     {
-      "path": "src/common",
+      "path": "force-app/main/default",
       "default": true
-    },
-    {
-      "path": "src/ui"
     }
   ],
   "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com"
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "40.0"
 }
