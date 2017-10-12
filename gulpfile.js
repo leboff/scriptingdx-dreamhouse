@@ -15,6 +15,10 @@ gulp.task('init', () => {
     .then(() => importData())
     .then(open);
 });
+
+gulp.task('auth', () =>{
+    return sfdx.auth.webLogin();
+})
 gulp.task('open', () =>{
     open();
 })
