@@ -26,7 +26,9 @@
     "yargs": "^9.0.1"
   },
   "dependencies": {
-    "sfdx-node": "git+ssh://git@appirio.githost.io:AppirioDx/sfdx-node.git",
+    "gulp-util": "^3.0.8",
+    "lodash": "^4.17.4",
     "salesforce-alm": "^40.10.0"
+    // "sfdx-node": "git+ssh://git@appirio.githost.io:AppirioDx/sfdx-node.git"
   }
 }

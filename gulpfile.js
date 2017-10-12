@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const sfdx = require('sfdx-node');
+const sfdx = require('./lib/sfdx-node');
 const yargs = require('yargs');
 const through = require('through2');
 const xml = require('gulp-xml');
