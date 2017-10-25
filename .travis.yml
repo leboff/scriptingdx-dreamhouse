@@ -19,6 +19,7 @@ before_install:
 #  --username $USERNAME --setdefaultdevhubusername -a HubOrg
 before_script:
 - npm install -g gulp-cli
+- npm install
 script:
 #- sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
 #- sfdx force:source:push -u ciorg
