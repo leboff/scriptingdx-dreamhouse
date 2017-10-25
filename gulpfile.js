@@ -8,7 +8,7 @@ const path = require('path');
 const colors = gutil.colors;
 const pad = require('pad');
 
-gulp.task('init', () => {
+gulp.task('init', ['auth'], () => {
     return createScratchOrg()
     .then(sourcePush)
     .then(() => assignPermissionSet())
@@ -17,7 +17,13 @@ gulp.task('init', () => {
 });
 
 gulp.task('auth', () =>{
-    return sfdx.auth.webLogin();
+    return sfdx.auth.jwtGrant({
+        clientid: process.env.CONSUMERKEY,
+        jwtkeyfile: 'assets/server.key',
+        username: process.env.USERNAME,
+        setdefaultdevhubusername: true,
+        setalias: 'HubOrg'
+    });
 })
 gulp.task('open', () =>{
     open();
