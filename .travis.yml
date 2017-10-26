@@ -13,5 +13,6 @@ script:
 #- sfdx force:apex:test:run -u ciorg -c -r human
 #- sfdx force:org:delete -u ciorg -p
 - gulp init
+- gulp test
 after_script:
-- gulp clean
+- gulp cleangit

@@ -18,11 +18,7 @@ gulp.task('init', ['auth'], () => {
     .then(sourcePush)
     .then(() => assignPermissionSet())
     .then(() => importData())
-    .then(open)
-    .then(() => {
-        //run tests on init if we're CI
-        if(process.env.CI) runTests()
-    });
+    .then(open);
 });
 
 gulp.task('auth', () =>{
