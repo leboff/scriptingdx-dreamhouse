@@ -8,6 +8,11 @@ const path = require('path');
 const colors = gutil.colors;
 const pad = require('pad');
 
+//Setup CI environment from config/.ci.env
+if(process.env.CI){
+    require('dotenv').config({path: 'config/.ci.env'});
+}
+
 gulp.task('init', ['auth'], () => {
     return createScratchOrg()
     .then(sourcePush)
