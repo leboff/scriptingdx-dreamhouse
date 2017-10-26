@@ -136,7 +136,7 @@ const list = () => {
     return sfdx.org.list();
 }
 const getDevHub = (list) => {
-    let devHub = list.nonScratchOrgs && list.nonScratchOrgs.filter(function(org){
+    let devHub = list && list.nonScratchOrgs && list.nonScratchOrgs.filter(function(org){
         return org.isDevHub && org.isDefaultDevHubUsername;
     });
 
