@@ -15,4 +15,4 @@ script:
 - gulp init
 - gulp test
 after_script:
-- gulp cleangit
+- gulp clean
