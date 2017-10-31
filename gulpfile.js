@@ -7,6 +7,10 @@ const gutil = require('gulp-util');
 const path = require('path');
 const colors = gutil.colors;
 const pad = require('pad');
+//Setup CI environment from config/.ci.env
+if(process.env.CI){
+    require('dotenv').config({path: 'config/.ci.env'});
+}
 
 gulp.task('init', ['auth'], () => {
     return createScratchOrg()
@@ -17,25 +21,39 @@ gulp.task('init', ['auth'], () => {
 });
 
 gulp.task('auth', () =>{
-    return sfdx.auth.jwtGrant({
-        clientid: process.env.CONSUMERKEY,
-        jwtkeyfile: 'assets/server.key',
-        username: process.env.USERNAME,
-        setdefaultdevhubusername: true,
-        setalias: 'HubOrg'
-    });
-})
-gulp.task('open', () =>{
-    open();
-})
+    return list()
+    .then(getDevHub)
+    .then((devHub) => {
+        //if we have a dev hub, good return it;
+        if(devHub) return Promise.resolve(devHub);
+
+        //otherwise if we're CI jwtAuth, otherwise webauth a dev hub
+        return process.env.CI ? authJwt() : authWeb();
+    })
+    .then(list);
+});
+gulp.task('create', () => {
+    return createScratchOrg();
+});
+
+gulp.task('assign', () => assignPermissionSet());
+gulp.task('data', () => importData());
+gulp.task('open', () => open());
+
+gulp.task('test', () => runTests())
+
 gulp.task('clean', () => {
     return list()
-    .then(getDefaultScratchOrg)
+    .then(getScratchOrg)
     .then(deleteOrg)
 });
 
 gulp.task('pull', () => {
     return sourcePull();
+});
+
+gulp.task('create', ['auth'] , () => {
+    return createScratchOrg();
 });
 
 gulp.task('check:fields', () => {
@@ -46,17 +64,50 @@ gulp.task('check:fields', () => {
 })
 
 gulp.task('watch', () => {
-    gulp.watch('**/*.field-meta.xml', ['check:fields'])
-})
+    gulp.watch('src/**/*.field-meta.xml', ['check:fields'])
+    gulp.watch('src/**/*.cls', ['push']);
+});
+gulp.task('list', () => list());
+gulp.task('push' , () => sourcePush())
 
-
-const createScratchOrg = (definitionfile = 'config/project-scratch-def.json', setdefaultusername = true) => {
-    return sfdx.org.create({
-        'definitionfile': definitionfile,
-        'setdefaultusername': setdefaultusername
+const authWeb = () => {
+    return sfdx.auth.webLogin({
+        setdefaultdevhubusername: true,
+        setalias: 'HubOrg'
     });
 }
 
+const authJwt = () => {
+    return sfdx.auth.jwtGrant({
+        clientid: process.env.CONSUMERKEY,
+        jwtkeyfile: 'assets/server.key',
+        username: process.env.USERNAME,
+        setdefaultdevhubusername: true,
+        setalias: 'HubOrg'
+    });
+}
+
+const webAuth = () =>
+    sfdx.auth.web()
+
+const createScratchOrg = (definitionfile = 'config/project-scratch-def.json', setdefaultusername = true) => {    
+        return sfdx.org.create({
+            'definitionfile': definitionfile,
+            'setdefaultusername': setdefaultusername    
+        });
+}
+
+const runTests = () => {
+    return sfdx.apex.testRun({
+        'resultformat': 'human'
+    }).then(function(results){
+        if(results.summary.outcome !== 'Passed'){
+            throw new gutil.PluginError('Test Run', {
+                message: 'Tests are failing'
+            });
+        }
+    });
+}
 const sourcePull = () => {
     return sfdx.source.pull();
 }
@@ -77,15 +128,23 @@ const importData = (plan = 'data/sample-data-plan.json') => {
 }
 
 const open = () =>{
-    return sfdx.org.open();
+    return !process.env.CI && sfdx.org.open();
 }
 
 const list = () => {
     return sfdx.org.list();
 }
+const getDevHub = (list) => {
+    let devHub = list && list.nonScratchOrgs && list.nonScratchOrgs.filter(function(org){
+        return org.isDevHub && org.isDefaultDevHubUsername;
+    });
 
-const getDefaultScratchOrg = (list) => {
+    return devHub && devHub.length > 0 && devHub[0]
+}
+const getScratchOrg = (list) => {
     let defaultOrg = list.scratchOrgs && list.scratchOrgs.filter(function(org){
+        if(yargs.argv.username) return (org.username == yargs.argv.username || org.alias == yargs.argv.username);
+        
         return org.isDefaultUsername;
     });
     return defaultOrg && defaultOrg.length>0 && defaultOrg[0]
