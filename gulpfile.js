@@ -128,10 +128,9 @@ const deleteOrg = (org) => {
 
 
 const warn = (type, subtype, msg, path) => {
-    msg = pad(msg||'' ,60,{colors:true});    
-    let prefix = pad(`${colors.yellow.bold(`${type} warning (${colors.cyan(subtype)})`)}`,40, {colors:true});
-
-    gutil.log(`${prefix} ${msg} ${colors.white(path)}`);
+    let prefix = `${' '.repeat(11)}${colors.yellow.bold(`${type} warning (${colors.cyan(subtype)})`)}`;
+    gutil.log(`${colors.white(path)}`);
+    console.log(`${prefix} ${msg ||''}`);
 }
 
 
