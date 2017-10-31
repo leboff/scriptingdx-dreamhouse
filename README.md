@@ -1,4 +1,5 @@
-# SFDX Dreamhouse App
+# SFDX Dreamhouse App 
+[![Build Status](https://travis-ci.org/leboff/scriptingdx-dreamhouse.svg?branch=master)](https://travis-ci.org/leboff/scriptingdx-dreamhouse)
 
 ## Development 
 
