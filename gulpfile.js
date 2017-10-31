@@ -14,26 +14,6 @@ if(process.env.CI){
 }
 
 
-/****** FIELD CHECKS ********/
-const checkFieldDescription = () => {
-    return validateXML((file) => {
-        let field = JSON.parse(file.contents.toString());
-        if(field.CustomField && !field.CustomField.description){
-            warn('Field', `missing description`, null, path.relative('src', file.path))
-        }
-    });
-}
-
-const checkLabelNameMismatch = () => {
-    return validateXML((file) => {
-        let field = JSON.parse(file.contents.toString());
-        let stdLabel = `${field.CustomField.label[0].split(' ').join('_')}__c`;
-        if(field.CustomField && stdLabel != field.CustomField.fullName){
-            warn('Field', `label mismatch`, `found ${colors.yellow(field.CustomField.fullName)} should be ${colors.green(stdLabel)}`, path.relative('src', file.path))
-        }
-    });
-}
-
 
 /****** HELPERS ********/
 
@@ -195,6 +175,11 @@ gulp.task('clean', () => {
     .then(deleteOrg)
 });
 
+gulp.task('watch', () => {
+    gulp.watch('src/**/*.field-meta.xml', ['check:fields'])
+    gulp.watch(['src/**/*.cls', 'src/**/*.trigger'], ['push']);
+});
+
 gulp.task('check:fields', () => {
     return gulp.src('**/*.field-meta.xml')
     .pipe(xml({outType: false}))
@@ -202,7 +187,24 @@ gulp.task('check:fields', () => {
     .pipe(checkLabelNameMismatch())
 })
 
-gulp.task('watch', () => {
-    gulp.watch('src/**/*.field-meta.xml', ['check:fields'])
-    gulp.watch('src/**/*.cls', ['push']);
-});
+
+/****** FIELD CHECKS ********/
+const checkFieldDescription = () => {
+    return validateXML((file) => {
+        let field = JSON.parse(file.contents.toString());
+        if(field.CustomField && !field.CustomField.description){
+            warn('Field', `missing description`, null, path.relative('src', file.path))
+        }
+    });
+}
+
+const checkLabelNameMismatch = () => {
+    return validateXML((file) => {
+        let field = JSON.parse(file.contents.toString());
+        let label = field.CustomField.label[0];
+        let stdLabel = `${label.split(' ').join('_')}__c`.replace(/[\W]+/g, "");
+        if(field.CustomField && stdLabel != field.CustomField.fullName){
+            warn('Field', `label mismatch`, `found ${colors.yellow(field.CustomField.fullName)} should be ${colors.green(stdLabel)}`, path.relative('src', file.path))
+        }
+    });
+}
