@@ -183,8 +183,8 @@ gulp.task('clean', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('src/**/*.field-meta.xml', ['check:fields'])
-    gulp.watch(['src/**/*.cls', 'src/**/*.trigger'], ['push']);
+    gulp.watch('force-app/**/*.field-meta.xml', ['check:fields'])
+    gulp.watch(['force-app/**/*.cls', 'force-app/**/*.trigger'], ['push']);
 
     pollPull();
 });
