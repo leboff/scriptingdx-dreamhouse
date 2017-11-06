@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const sfdx = require('./lib/sfdx-node');
+const sfdx = require('sfdx-node');
 const yargs = require('yargs');
 const through = require('through2');
 const xml = require('gulp-xml');
@@ -44,6 +44,13 @@ const createScratchOrg = (definitionfile = 'config/project-scratch-def.json', se
 }
 
 const sourcePull = () => sfdx.source.pull({quiet:false});
+
+const pollPull = () => {
+    gutil.log('Checking dev hub for changes...')
+    sfdx.source.pull({quiet:false}).then(function(){
+        setTimeout(pollPull, 10000);
+    });
+}
 
 const sourcePush = () => sfdx.source.push({quiet: false});
 
@@ -178,6 +185,8 @@ gulp.task('clean', () => {
 gulp.task('watch', () => {
     gulp.watch('src/**/*.field-meta.xml', ['check:fields'])
     gulp.watch(['src/**/*.cls', 'src/**/*.trigger'], ['push']);
+
+    pollPull();
 });
 
 gulp.task('check:fields', () => {
