@@ -23,7 +23,7 @@ global with sharing class PropertyController {
 
     @AuraEnabled
     public static Property__c findById(Id propertyId) {
-        return [SELECT id, name, beds__c, baths__c, address__c, city__c, state__c, assessed_value__c, price__c, Date_Listed__c, Location__Latitude__s, Location__Longitude__s 
+        return [SELECT id, name, beds__c, baths__c, address__c, city__c, checkbox__c, state__c, assessed_value__c, price__c, Date_Listed__c, Location__Latitude__s, Location__Longitude__s 
                 FROM Property__c
                 WHERE Id=:propertyId];
     }
