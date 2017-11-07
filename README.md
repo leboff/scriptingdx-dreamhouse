@@ -6,7 +6,11 @@
 ### Getting Started
 ```bash
 npm install
-gulp init && gulp watch
+
+#Start Development
+gulp auth
+gulp init 
+gulp watch
 ```
 
 ### Before Push
