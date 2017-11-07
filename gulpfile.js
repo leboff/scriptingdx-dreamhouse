@@ -27,7 +27,7 @@ if(process.env.CI){
  * 
  * depends: create, init:push, init:assign, init:import
  */
-gulp.task('init', ['create', 'init:push', 'init:assign', 'init:import'], open);
+gulp.task('init', ['create', 'init:push', 'init:assign', 'init:import'], ()=>open());
 
 
 /**
@@ -93,7 +93,7 @@ const createScratchOrg = (definitionfile = 'config/project-scratch-def.json', se
  * 
  * depends: create
  */
-gulp.task('init:push', ['create'], sourcePush);
+gulp.task('init:push', ['create'], () => sourcePush());
 
 const sourcePush = () => sfdx.source.push({quiet: false});
 
